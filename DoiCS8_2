@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+ifstream in("coso.inp");
+ofstream out("coso.out");
+
+string s;
+
+void doics10_2(int n) {
+	stack<int> st;
+	while (n > 0) {
+		st.push(n % 2);
+		n /= 2;
+	}
+	while(st.size()<3) {
+	    st.push(0);
+	}
+	while (!st.empty()) {
+		out << st.top();
+		st.pop();
+	}
+}
+
+void doics8_2(int i) {
+	if (i == s.length()) return;
+	if (s[i] == '0' && i != 0) {
+        out << "000";
+    }
+    else if (s[i] == '1' && i == 0) {
+        out << 1;
+    }
+    else {
+    doics10_2(s[i] - '0');
+    }
+	doics8_2(i + 1);
+}
+
+
+int main()
+{
+
+	in >> s;
+	doics8_2(0); 
+
+	in.close();
+	out.close();
+	return 0;
+}
